@@ -252,6 +252,7 @@ public class Main {
             System.out.println(generateNewText("seek to explore new and exciting synergies",graph,words,posToWord));
             // 关闭文件
             reader.close();
+            //修改测试222 323232 change sth.
         } catch (IOException e) {
             e.printStackTrace();
         }
