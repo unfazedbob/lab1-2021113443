@@ -82,6 +82,9 @@ public class Main {
     }
 
     public static String calcShortestPath(String word1, String word2,int[][] graph,HashMap<String,Integer> words,HashMap<Integer,String> posToWord){
+        if(!words.containsKey(word1)||!words.containsKey(word2)){
+            return "No word1 or word2 in the graph!";
+        }
         //使用bfs寻找最短路径
         ArrayDeque<Integer> queue = new ArrayDeque<>();
         int start = words.get(word1);
@@ -182,7 +185,9 @@ public class Main {
         return res.toString();
 
     }
+    @SuppressWarnings({"checkstyle:Indentation", "checkstyle:WhitespaceAround", "checkstyle:WhitespaceAfter"})
     public static void main(String[] args) {
+        System.out.println("存在特殊字符");
         try {
             // 读取文件
             String currentDir = System.getProperty("user.dir");
@@ -218,6 +223,7 @@ public class Main {
                    }else if(isLetter(c)){
                        temp.append(c);
                    }else{
+                       System.out.println("存在特殊字符");
                        temp.setLength(0);
                    }
                 }
@@ -233,6 +239,11 @@ public class Main {
                 }
             }
 
+            if(words.size()==0){
+                System.out.println("输入为空");
+                return;
+            }
+
             //生成图结构
             int[][] graph = generateGraph(words, list.toArray(new String[0]));
 
@@ -240,16 +251,20 @@ public class Main {
             showDirectedGraph(graph,posToWord);
 
             //查询桥接词
-            System.out.println(queryBridgeWords("out","life",graph,words,posToWord));
+            System.out.print("桥接词为：");
+            System.out.println(queryBridgeWords("Better","than",graph,words,posToWord));
 
             //输出最短路径
-            System.out.println(calcShortestPath("to","and",graph,words,posToWord));
+            System.out.print("最短路径：");
+            System.out.println(calcShortestPath("can","and",graph,words,posToWord));
 
             //随机游走
+            System.out.print("随机游走：");
             System.out.println(randomWalk(graph,words,posToWord));
 
             //根据bridge生成新文本
-            System.out.println(generateNewText("seek to explore new and exciting synergies",graph,words,posToWord));
+            System.out.print("根据bridge生成新文本：");
+            System.out.println(generateNewText("Better than anything",graph,words,posToWord));
             // 关闭文件
             reader.close();
             //修改测试222 323232 change sth.
